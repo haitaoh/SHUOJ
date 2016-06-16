@@ -1,0 +1,46 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool flag,iscontinue;
+
+void ischild(string a, string b, int s, int d) {//a,b串。s,d分别为a,b起始查找位置
+	if (!flag && iscontinue) {
+		int lengtha = a.length(), lengthb = b.length();
+		if (s == lengtha) {
+			flag = true;
+			return;
+		}
+		if ((lengtha - s) > (lengthb - d))
+			return;
+		for (int i = s; i < lengtha; i++) {
+			bool f = false;
+			for (int j = d; j < lengthb; j++) {
+				if (a[i] == b[j] && iscontinue) {
+					f = true;
+					if (i + 1 == lengtha)
+						flag = true;
+					else if (j + 1 == lengthb)
+						return;
+					else ischild(a, b, i + 1, j + 1);
+				}
+			}
+			if (!f) iscontinue = false;
+		}
+	}
+}
+
+int main()
+{
+	static string str1, str2;
+	while (cin >> str1 >> str2) {
+		flag = false; iscontinue = true;
+		ischild(str1, str2, 0, 0);
+		if (flag)
+			cout << "Yes" << endl;
+		else cout << "No" << endl;
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
