@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+void binaryout(int i) {
+	if (i < 2) cout << i;
+	else {
+		int j = i / 2;
+		i = i % 2;
+		if (j == 0)
+			return;
+		else binaryout(j);
+		cout << i;
+	}
+}
+
+int main()
+{
+	int n;
+	while (cin >> n) {
+		if (n < 0) {
+			cout.width(11);
+			cout << n << "-->" << "-";
+			binaryout(-n);
+		}
+		else {
+			cout.width(11);
+			cout << n << "-->";
+			binaryout(n);
+		}
+		cout << endl;
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
