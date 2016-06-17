@@ -1,0 +1,38 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+	int n, s, a[1000],sum;
+	bool is;
+	while (cin >> n >> s) {
+		for (int i = 0; i < n; i++)
+			cin >> a[i];
+		sort(a, a + n);
+		sum = 0;
+		is = true;
+		for (int i = 0; i < n; i++) {
+			if (a[i] > s) break;
+			if (is) {
+				for (int j = i+1; j < n; j++) {
+					if (a[j] > s || a[i] + a[j] > s) break;
+					if (is) {
+						for (int k = j+1; k < n; k++) {
+							if (a[k] > s) break;
+							sum = a[i] + a[j] + a[k];
+							if (sum == s) {
+								is = false; break;
+							}
+						}
+					}
+				}
+			}
+		}
+		if (is) cout << "NO" << endl;
+		else cout << "YES" << endl;
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
