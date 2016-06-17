@@ -1,0 +1,34 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+struct indexof{
+	int value;
+	int vi;
+};
+
+bool compare(indexof c, indexof d) {
+	return c.value < d.value;
+}
+
+int main()
+{
+	int n,count;
+	indexof a[100000];
+	while (cin >> n) {
+		for (int i = 0; i < n; i++) {
+			cin >> a[i].value;
+			a[i].vi = i;
+		}
+		sort(a, a + n, compare);
+		count = 0;
+		for (int i = 0; i < n; i++) {
+			if (count < a[i].vi - i)
+				count = a[i].vi - i;
+		}
+		cout << count << endl;
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
